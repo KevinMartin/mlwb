@@ -1,3 +1,8 @@
+.DS_Store
+webpack-assets.json
+webpack-stats.json
+static/dist/
+
 # Logs
 logs
 *.log
