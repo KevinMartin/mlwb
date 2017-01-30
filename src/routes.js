@@ -1,9 +1,10 @@
 import React from 'react';
-import { Route } from 'react-router';
+import { IndexRoute, Route } from 'react-router';
 // import { isLoaded as isAuthLoaded, load as loadAuth, setReferralCode } from 'redux/modules/auth';
 import {
 	App
 } from 'containers';
+import Home from 'routes/Home/Home';
 
 export default () => {
 	const requireLogin = (nextState, replace, cb) => {
@@ -35,7 +36,7 @@ export default () => {
 
 	return (
 		<Route path="/" component={App}>
-			{/* <IndexRoute component={Home} /> */}
+			<IndexRoute component={Home} />
 
 			<Route onEnter={requireLogin} />
 		</Route>

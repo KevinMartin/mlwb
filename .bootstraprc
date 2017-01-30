@@ -84,21 +84,21 @@ styles:
   breadcrumbs: true
   pagination: true
   pager: true
-  labels: true
-  badges: true
-  jumbotron: true
-  thumbnails: true
+  labels: false
+  badges: false
+  jumbotron: false
+  thumbnails: false
   alerts: true
-  progress-bars: true
+  progress-bars: false
   media: true
   list-group: true
   panels: true
-  wells: true
+  wells: false
   responsive-embed: true
   close: true
 
   # Components w/ JavaScript
-  modals: false
+  modals: true
   tooltip: false
   popovers: false
   carousel: false
