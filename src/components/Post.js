@@ -1,23 +1,32 @@
 import React, { PropTypes } from 'react';
-import { PostBody, PostComments } from 'components';
+import { PostLink } from 'components';
+import data from 'decorators/data';
 
-const Post = ({ id, post, comments, excerpt }) => (
-	<section>
-		<PostBody id={id} post={post} excerpt={excerpt} />
-		<PostComments id={id} comments={comments} />
-	</section>
+const Post = ({ id, post, data: author, summary }) => (
+	<article className="panel">
+		<header>
+			<PostLink id={id}>
+				<h1>{post.title}</h1>
+			</PostLink>
+
+			<p>Created By: {author.username}</p>
+		</header>
+
+		{ summary
+			? <PostLink id={id}>View Full Post</PostLink>
+			: <div>{post.content}</div> }
+	</article>
 );
 
 Post.propTypes = {
 	id: PropTypes.string.isRequired,
+	data: PropTypes.object.isRequired,
 	post: PropTypes.object.isRequired,
-	comments: PropTypes.array,
-	excerpt: PropTypes.bool
+	summary: PropTypes.bool
 };
 
 Post.defaultProps = {
-	comments: [],
-	excerpt: false
+	summary: false
 };
 
-export default Post;
+export default data(({ post }) => `users/${post.uid}`)(Post);
