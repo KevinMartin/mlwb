@@ -5,5 +5,6 @@ export Post from './Post';
 export PostBody from './PostBody';
 export PostComment from './PostComment';
 export PostComments from './PostComments';
+export PostForm from './PostForm';
 export PostLink from './PostLink';
 export Sidebar from './Sidebar';

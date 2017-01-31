@@ -68,11 +68,11 @@ app.use((req, res) => {
 				userAgent: req.headers['user-agent']
 			};
 
-			if (renderProps.components[renderProps.components.length - 1].name === 'NotFound') {
-				res.status(404);
-			} else {
-				res.status(200);
-			}
+			// if (renderProps.components[renderProps.components.length - 1].name === 'NotFound') {
+			// 	res.status(404);
+			// } else {
+			res.status(200);
+			// }
 
 			const component = (
 				<Provider store={store} key="provider">

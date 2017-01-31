@@ -22,6 +22,10 @@ export default () => (
 						<NavItem>Home</NavItem>
 					</LinkContainer>
 
+					<LinkContainer to="/posts/create">
+						<NavItem>Create Post</NavItem>
+					</LinkContainer>
+
 					<li role="presentation">
 						<AuthButton componentClass="a" href="#" className="" />
 					</li>

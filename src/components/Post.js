@@ -1,14 +1,15 @@
 import React, { PropTypes } from 'react';
 import { PostBody, PostComments } from 'components';
 
-const Post = ({ post, comments, excerpt }) => (
+const Post = ({ id, post, comments, excerpt }) => (
 	<section>
-		<PostBody post={post} excerpt={excerpt} />
-		<PostComments comments={comments} />
+		<PostBody id={id} post={post} excerpt={excerpt} />
+		<PostComments id={id} comments={comments} />
 	</section>
 );
 
 Post.propTypes = {
+	id: PropTypes.string.isRequired,
 	post: PropTypes.object.isRequired,
 	comments: PropTypes.array,
 	excerpt: PropTypes.bool
