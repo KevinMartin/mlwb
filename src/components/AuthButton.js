@@ -2,13 +2,18 @@ import React, { PropTypes } from 'react';
 import data from 'decorators/data';
 import authDecorator from 'decorators/ensureAccount';
 
+const preventDefault = cb => (event) => {
+	event.preventDefault();
+	cb();
+};
+
 const LoginButton = ({
 	componentClass: Component,
 	ensureAccount,
 	children,
 	...props
 }) => (
-	<Component {...props} onClick={() => ensureAccount(() => null)}>
+	<Component {...props} onClick={preventDefault(() => ensureAccount(() => null))}>
 		Log In / Sign Up
 		{children}
 	</Component>
@@ -30,7 +35,12 @@ const LogoutButton = ({
 	data: profile,
 	...props
 }) => (
-	<Component {...props} onClick={() => firebase.logout()}>
+	<Component
+		{...props}
+		onClick={preventDefault(() => {
+			firebase.logout();
+			window.location = '/';
+		})}>
 		Log Out ({profile.username})
 	</Component>
 );
