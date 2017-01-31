@@ -1,6 +1,7 @@
 export AuthButton from './AuthButton';
 export AuthForm from './AuthForm';
 export Header from './Header';
+export Jumbotron from './Jumbotron';
 export Post from './Post';
 export PostActions from './PostActions';
 export PostComment from './PostComment';

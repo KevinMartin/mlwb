@@ -1,7 +1,7 @@
 import React from 'react';
 import { IndexLink } from 'react-router';
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import { IndexLinkContainer, LinkContainer } from 'react-router-bootstrap';
 import { AuthButton } from 'components';
 import config from 'config';
 import styles from './styles.scss';
@@ -18,9 +18,9 @@ export default () => (
 
 		<Navbar.Collapse>
 			<Nav pullRight>
-				<LinkContainer to="/">
+				<IndexLinkContainer to="/">
 					<NavItem>Home</NavItem>
-				</LinkContainer>
+				</IndexLinkContainer>
 
 				<LinkContainer to="/posts/create">
 					<NavItem>Create Post</NavItem>

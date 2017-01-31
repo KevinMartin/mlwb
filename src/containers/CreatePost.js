@@ -1,14 +1,22 @@
 import React, { PropTypes } from 'react';
-import { PostForm } from 'components';
+import { Jumbotron, PostForm } from 'components';
 import data from 'decorators/data';
 
 const CreatePost = ({ firebase, data: auth }) => (
-	<PostForm
-		onSubmit={values => firebase.push('posts', {
-			...values,
-			uid: auth.uid,
-			datetime: new Date().toISOString()
-		})} />
+	<div>
+		<Jumbotron>
+			<h1>Create Post</h1>
+		</Jumbotron>
+
+		<div className="container">
+			<PostForm
+				onSubmit={values => firebase.push('posts', {
+					...values,
+					uid: auth.uid,
+					datetime: new Date().toISOString()
+				})} />
+		</div>
+	</div>
 );
 
 CreatePost.propTypes = {

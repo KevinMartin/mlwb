@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { PostLink } from 'components';
+import { Jumbotron, PostLink } from 'components';
 import data from 'decorators/data';
 
 const DeletePost = ({ params: { id }, firebase, auth, post }) => {
@@ -12,11 +12,17 @@ const DeletePost = ({ params: { id }, firebase, auth, post }) => {
 	const handleDelete = () => firebase.remove(`posts/${id}`);
 
 	return (
-		<div className="panel">
-			<p>Are you sure you would like to delete this blog post?</p>
+		<div>
+			<Jumbotron>
+				<h1>Edit Post</h1>
+			</Jumbotron>
 
-			<button className="btn btn-danger" onClick={handleDelete}>Yes, Delete</button>
-			<PostLink id={id}>Cancel</PostLink>
+			<div className="container text-center">
+				<p>Are you sure you would like to delete this blog post?</p>
+
+				<button className="btn btn-danger" onClick={handleDelete}>Yes, Delete</button>
+				<PostLink id={id}>Cancel</PostLink>
+			</div>
 		</div>
 	);
 };

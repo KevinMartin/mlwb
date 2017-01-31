@@ -3,6 +3,7 @@
 .navbar {
 	background-color: transparent;
 	border: 0;
+	margin-bottom: 0;
 }
 
 @media only screen and (min-width: 768px) {
@@ -10,5 +11,13 @@
 		position: absolute;
 		top: 0;
 		width: 100%;
+
+		a {
+			color: #FFFFFF !important;
+		}
+
+		:global(.active) a {
+			background-color: #444444 !important;
+		}
 	}
 }

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { PostForm } from 'components';
+import { Jumbotron, PostForm } from 'components';
 import data from 'decorators/data';
 
 const EditPost = ({ params: { id }, firebase, auth, post }) => {
@@ -10,9 +10,17 @@ const EditPost = ({ params: { id }, firebase, auth, post }) => {
 	}
 
 	return (
-		<PostForm
-			initialValues={post}
-			onSubmit={values => firebase.set(`posts/${id}`, values)} />
+		<div>
+			<Jumbotron>
+				<h1>Edit Post</h1>
+			</Jumbotron>
+
+			<div className="container">
+				<PostForm
+					initialValues={post}
+					onSubmit={values => firebase.set(`posts/${id}`, values)} />
+			</div>
+		</div>
 	);
 };
 
