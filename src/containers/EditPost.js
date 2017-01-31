@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Helmet from 'react-helmet';
 import { Jumbotron, PostForm } from 'components';
 import data from 'decorators/data';
 
@@ -11,6 +12,8 @@ const EditPost = ({ params: { id }, firebase, auth, post }) => {
 
 	return (
 		<div>
+			<Helmet title={`Edit ${post.title}`} />
+
 			<Jumbotron>
 				<h1>Edit Post</h1>
 			</Jumbotron>

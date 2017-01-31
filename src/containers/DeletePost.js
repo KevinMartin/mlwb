@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Helmet from 'react-helmet';
 import { Jumbotron, PostLink } from 'components';
 import data from 'decorators/data';
 
@@ -13,6 +14,8 @@ const DeletePost = ({ params: { id }, firebase, auth, post }) => {
 
 	return (
 		<div>
+			<Helmet title={`Delete ${post.title}`} />
+
 			<Jumbotron>
 				<h1>Edit Post</h1>
 			</Jumbotron>

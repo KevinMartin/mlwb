@@ -1,9 +1,12 @@
 import React, { PropTypes } from 'react';
+import Helmet from 'react-helmet';
 import { Jumbotron, PostForm } from 'components';
 import data from 'decorators/data';
 
 const CreatePost = ({ firebase, data: auth }) => (
 	<div>
+		<Helmet title="Create Blog Post" />
+
 		<Jumbotron>
 			<h1>Create Post</h1>
 		</Jumbotron>

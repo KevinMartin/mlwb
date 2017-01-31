@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Helmet from 'react-helmet';
 import { Jumbotron, Post, PostActions, PostComments, PostHeader } from 'components';
 import data from 'decorators/data';
 
@@ -8,6 +9,8 @@ const NotFound = () => (
 
 const ViewPost = ({ params: { id }, data: post }) => (
 	<div>
+		<Helmet title={post.title} />
+
 		<Jumbotron image="post">
 			<PostHeader id={id} post={post} />
 		</Jumbotron>

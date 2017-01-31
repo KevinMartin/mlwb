@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Helmet from 'react-helmet';
 import { Jumbotron, Paginate, PostHeader } from 'components';
 import dataDecorator from 'decorators/data';
 import { app } from 'config';
@@ -20,6 +21,8 @@ const Home = ({ params: { page = 1 }, data }) => {
 
 	return (
 		<div>
+			<Helmet title="Home" />
+
 			<Jumbotron image="home">
 				<h1>{app.title}</h1>
 				<h2>{app.description}</h2>
@@ -27,13 +30,13 @@ const Home = ({ params: { page = 1 }, data }) => {
 
 			<div className="container">
 				{visible.map(post => <PostHeader key={post.id} id={post.id} post={post} />)}
-			</div>
 
-			<Paginate
-				page={+page}
-				hasPrev={page > 1}
-				hasNext={posts.length > page * postsPerPage}
-				routeTemplate="/page/{page}" />
+				<Paginate
+					page={+page}
+					hasPrev={page > 1}
+					hasNext={posts.length > page * postsPerPage}
+					routeTemplate="/page/{page}" />
+			</div>
 		</div>
 	);
 };
