@@ -4,7 +4,7 @@ import data from 'decorators/data';
 
 const Home = ({ data: posts }) => (
 	<div>
-		{Object.keys(posts).map(id => <Post key={id} id={id} post={posts[id]} excerpt />)}
+		{Object.keys(posts).map(id => <Post key={id} id={id} post={posts[id]} summary />)}
 	</div>
 );
 
