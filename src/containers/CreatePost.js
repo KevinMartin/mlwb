@@ -1,9 +1,11 @@
 import React, { PropTypes } from 'react';
 import Helmet from 'react-helmet';
+import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import { Jumbotron, PostForm } from 'components';
 import data from 'decorators/data';
 
-const CreatePost = ({ firebase, data: auth }) => (
+const CreatePost = ({ firebase, pushState, data: auth }) => (
 	<div>
 		<Helmet title="Create Blog Post" />
 
@@ -17,16 +19,19 @@ const CreatePost = ({ firebase, data: auth }) => (
 					...values,
 					uid: auth.uid,
 					datetime: new Date().toISOString()
-				})} />
+				}, () => pushState('/'))} />
 		</div>
 	</div>
 );
 
 CreatePost.propTypes = {
 	firebase: PropTypes.object.isRequired,
+	pushState: PropTypes.func.isRequired,
 	data: PropTypes.shape({
 		uid: PropTypes.string.isRequired
 	}).isRequired
 };
 
-export default data('/auth')(CreatePost);
+export default connect(() => ({}), { pushState: push })(
+	data('/auth')(CreatePost)
+);

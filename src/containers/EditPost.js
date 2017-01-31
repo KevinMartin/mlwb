@@ -1,13 +1,14 @@
 import React, { PropTypes } from 'react';
 import Helmet from 'react-helmet';
+import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import { Jumbotron, PostForm } from 'components';
 import data from 'decorators/data';
 
-const EditPost = ({ params: { id }, firebase, auth, post }) => {
+const EditPost = ({ params: { id }, firebase, pushState, auth, post }) => {
 	if (auth.uid !== post.uid) {
-		return (
-			<div>403: Forbidden</div>
-		);
+		pushState('/404');
+		return null;
 	}
 
 	return (
@@ -21,7 +22,7 @@ const EditPost = ({ params: { id }, firebase, auth, post }) => {
 			<div className="container">
 				<PostForm
 					initialValues={post}
-					onSubmit={values => firebase.set(`posts/${id}`, values)} />
+					onSubmit={values => firebase.set(`posts/${id}`, values, () => pushState(`/posts/${id}`))} />
 			</div>
 		</div>
 	);
@@ -29,6 +30,7 @@ const EditPost = ({ params: { id }, firebase, auth, post }) => {
 
 EditPost.propTypes = {
 	firebase: PropTypes.object.isRequired,
+	pushState: PropTypes.func.isRequired,
 	params: PropTypes.shape({
 		id: PropTypes.string.isRequired
 	}).isRequired,
@@ -40,6 +42,8 @@ EditPost.propTypes = {
 	}).isRequired
 };
 
-export default data('/auth', { propKey: 'auth' })(
-	data(({ params: { id } }) => `posts/${id}`, { propKey: 'post' })(EditPost)
+export default connect(() => ({}), { pushState: push })(
+	data('/auth', { propKey: 'auth' })(
+		data(({ params: { id } }) => `posts/${id}`, { propKey: 'post' })(EditPost)
+	)
 );

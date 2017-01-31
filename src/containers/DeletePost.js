@@ -1,16 +1,17 @@
 import React, { PropTypes } from 'react';
 import Helmet from 'react-helmet';
+import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import { Jumbotron, PostLink } from 'components';
 import data from 'decorators/data';
 
-const DeletePost = ({ params: { id }, firebase, auth, post }) => {
+const DeletePost = ({ params: { id }, firebase, pushState, auth, post }) => {
 	if (auth.uid !== post.uid) {
-		return (
-			<div>403: Forbidden</div>
-		);
+		pushState('/404');
+		return null;
 	}
 
-	const handleDelete = () => firebase.remove(`posts/${id}`);
+	const handleDelete = () => firebase.remove(`posts/${id}`, () => pushState('/'));
 
 	return (
 		<div>
@@ -32,6 +33,7 @@ const DeletePost = ({ params: { id }, firebase, auth, post }) => {
 
 DeletePost.propTypes = {
 	firebase: PropTypes.object.isRequired,
+	pushState: PropTypes.func.isRequired,
 	params: PropTypes.shape({
 		id: PropTypes.string.isRequired
 	}).isRequired,
@@ -43,6 +45,8 @@ DeletePost.propTypes = {
 	}).isRequired
 };
 
-export default data('/auth', { propKey: 'auth' })(
-	data(({ params: { id } }) => `posts/${id}`, { propKey: 'post' })(DeletePost)
+export default connect(() => ({}), { pushState: push })(
+	data('/auth', { propKey: 'auth' })(
+		data(({ params: { id } }) => `posts/${id}`, { propKey: 'post' })(DeletePost)
+	)
 );
