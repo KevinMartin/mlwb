@@ -1,11 +1,15 @@
 import React, { PropTypes } from 'react';
 import { PostLink } from 'components';
+import markdownIt from 'markdown-it';
+
+const md = markdownIt('commonmark');
 
 const Post = ({ id, post, summary }) => (
 	<article>
 		{ summary
 			? <PostLink id={id}>View Full Post</PostLink>
-			: <div>{post.content}</div> }
+			: <div dangerouslySetInnerHTML={{ __html: md.render(post.content) }} /> // eslint-disable-line
+		}
 	</article>
 );
 
