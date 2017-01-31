@@ -4,6 +4,8 @@ import {
 	App,
 	AuthenticatedRoute,
 	CreatePost,
+	DeletePost,
+	EditPost,
 	Home,
 	ViewPost
 } from 'containers';
@@ -14,8 +16,10 @@ export default () => (
 
 		<Route component={AuthenticatedRoute}>
 			<Route path="posts/create" component={CreatePost} />
+			<Route path="posts/:id/edit" component={EditPost} />
+			<Route path="posts/:id/delete" component={DeletePost} />
 		</Route>
 
-		<Route path="post/:id" component={ViewPost} />
+		<Route path="posts/:id" component={ViewPost} />
 	</Route>
 );

@@ -2,11 +2,11 @@ import React, { PropTypes } from 'react';
 import { PostForm } from 'components';
 import data from 'decorators/data';
 
-const CreatePost = ({ firebase, data: profile }) => (
+const CreatePost = ({ firebase, data: auth }) => (
 	<PostForm
 		onSubmit={values => firebase.push('posts', {
 			...values,
-			username: profile.username,
+			uid: auth.uid,
 			datetime: new Date().toISOString()
 		})} />
 );
@@ -14,8 +14,8 @@ const CreatePost = ({ firebase, data: profile }) => (
 CreatePost.propTypes = {
 	firebase: PropTypes.object.isRequired,
 	data: PropTypes.shape({
-		username: PropTypes.string.isRequired
+		uid: PropTypes.string.isRequired
 	}).isRequired
 };
 
-export default data('/profile')(CreatePost);
+export default data('/auth')(CreatePost);
