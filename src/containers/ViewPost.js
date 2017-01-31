@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Jumbotron, Post, PostActions, PostComments } from 'components';
+import { Jumbotron, Post, PostActions, PostComments, PostHeader } from 'components';
 import data from 'decorators/data';
 
 const NotFound = () => (
@@ -8,8 +8,8 @@ const NotFound = () => (
 
 const ViewPost = ({ params: { id }, data: post }) => (
 	<div>
-		<Jumbotron>
-			<h1>{post.title}</h1>
+		<Jumbotron image="post">
+			<PostHeader id={id} post={post} />
 		</Jumbotron>
 
 		<section className="container">

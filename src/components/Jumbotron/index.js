@@ -2,23 +2,25 @@ import React, { PropTypes } from 'react';
 import { Jumbotron } from 'react-bootstrap';
 import styles from './styles.scss';
 
-const images = Object.keys(styles).filter(image => image !== 'base');
+function getClass(image) {
+	const imageClass = styles[image] || styles.other;
 
-function getRandomImage() {
-	const index = Math.floor(Math.random() * images.length);
-	const image = styles[images[index]];
-
-	return `${styles.base} ${image}`;
+	return `${styles.base} ${imageClass}`;
 }
 
-const Jumbo = ({ children }) => (
-	<Jumbotron className={getRandomImage()}>
+const Jumbo = ({ image, children }) => (
+	<Jumbotron className={getClass(image)}>
 		<div>{children}</div>
 	</Jumbotron>
 );
 
 Jumbo.propTypes = {
+	image: PropTypes.oneOf(['home', 'post', 'other']),
 	children: PropTypes.node.isRequired
+};
+
+Jumbo.defaultProps = {
+	image: 'other'
 };
 
 export default Jumbo;

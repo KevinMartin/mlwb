@@ -8,10 +8,14 @@ const PostActions = ({ id, post, data: auth }) => {
 	}
 
 	return (
-		<div className="panel">
-			<PostLink id={id} action="edit">Edit Post</PostLink>
-			<PostLink id={id} action="delete">Delete Post</PostLink>
-		</div>
+		<ul className="list-inline">
+			<li>
+				<PostLink id={id} action="edit">Edit Post</PostLink>
+			</li>
+			<li>
+				<PostLink id={id} action="delete">Delete Post</PostLink>
+			</li>
+		</ul>
 	);
 };
 

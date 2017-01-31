@@ -20,7 +20,7 @@ const DeletePost = ({ params: { id }, firebase, auth, post }) => {
 			<div className="container text-center">
 				<p>Are you sure you would like to delete this blog post?</p>
 
-				<button className="btn btn-danger" onClick={handleDelete}>Yes, Delete</button>
+				<button className="btn btn-danger" onClick={handleDelete}>Yes, Delete</button>{' '}
 				<PostLink id={id}>Cancel</PostLink>
 			</div>
 		</div>

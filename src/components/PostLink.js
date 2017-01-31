@@ -6,7 +6,7 @@ function getPath(id, action) {
 }
 
 const PostLink = ({ id, action, children }) => (
-	<Link to={getPath(id, action)} className="btn btn-link">{children}</Link>
+	<Link to={getPath(id, action)}>{children}</Link>
 );
 
 PostLink.propTypes = {

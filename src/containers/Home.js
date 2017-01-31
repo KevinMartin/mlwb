@@ -1,17 +1,17 @@
 import React, { PropTypes } from 'react';
-import { Jumbotron, Post } from 'components';
+import { Jumbotron, PostHeader } from 'components';
 import data from 'decorators/data';
 import { app } from 'config';
 
 const Home = ({ data: posts }) => (
 	<div>
-		<Jumbotron>
+		<Jumbotron image="home">
 			<h1>{app.title}</h1>
 			<h2>{app.description}</h2>
 		</Jumbotron>
 
 		<div className="container">
-			{Object.keys(posts).map(id => <Post key={id} id={id} post={posts[id]} summary />)}
+			{Object.keys(posts).map(id => <PostHeader key={id} id={id} post={posts[id]} />)}
 		</div>
 	</div>
 );

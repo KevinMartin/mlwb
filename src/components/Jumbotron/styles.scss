@@ -1,21 +1,24 @@
 .base {
 	align-items: center;
 	background-position: center;
-	color: #FFFFFF;
 	display: flex;
 	justify-content: center;
 	min-height: 50vh;
 	text-align: center;
+
+	&, & a {
+		color: #FFFFFF;
+	}
 }
 
-.image1 {
+.home {
 	background-image: url(http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg);
 }
 
-.image2 {
+.post {
 	background-image: url(http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/assets/about-bg.jpg);
 }
 
-.image3 {
+.other {
 	background-image: url(http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/assets/contact-bg.jpg);
 }
