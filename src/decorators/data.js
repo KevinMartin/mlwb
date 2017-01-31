@@ -40,7 +40,7 @@ export default (pathOrFn, {
 
 	return firebase(query)(
 		connect(({ firebase: fb }, props) => ({
-			[propKey]: toJS(fb, getPath(props, fb))
+			[propKey]: toJS(fb, getPath(props, fb).split('#')[0])
 		}))(DataContainer)
 	);
 };

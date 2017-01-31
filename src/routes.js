@@ -13,7 +13,8 @@ import {
 
 export default () => (
 	<Route path="/" component={App}>
-		<IndexRoute component={Home} />
+		<IndexRoute getComponent={(nextState, cb) => cb(null, props => <Home {...props} />)} />
+		<Route path="page/:page" getComponent={(nextState, cb) => cb(null, props => <Home {...props} />)} />
 
 		<Route component={AuthenticatedRoute}>
 			<Route path="posts/create" component={CreatePost} />
