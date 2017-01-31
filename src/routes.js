@@ -7,6 +7,7 @@ import {
 	DeletePost,
 	EditPost,
 	Home,
+	NotFound,
 	ViewPost
 } from 'containers';
 
@@ -21,5 +22,6 @@ export default () => (
 		</Route>
 
 		<Route path="posts/:id" component={ViewPost} />
+		<Route path="*" component={NotFound} />
 	</Route>
 );
