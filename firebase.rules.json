@@ -1,0 +1,60 @@
+{
+  "rules": {
+    ".read": true,
+    ".write": false,
+
+    "posts": {
+      "$post": {
+        ".write": "!data.exists() || data.child('uid').val() === auth.uid",
+        ".validate": "newData.hasChildren(['title', 'content', 'uid', 'datetime'])",
+
+        "title": {
+          ".validate": "newData.val().length > 0"
+        },
+        "content": {
+          ".validate": "newData.val().length > 0"
+        },
+        "uid": {
+          ".validate": "root.child('users').child(newData.val()).exists()"
+        },
+        "datetime": {
+          ".validate": true
+        },
+
+        "comments": {
+          "$comment": {
+            ".write": "!data.exists() || data.child('uid').val() === auth.uid",
+            ".validate": "newData.hasChildren(['content', 'uid', 'datetime'])",
+
+            "content": {
+          		".validate": "newData.val().length > 0"
+        		},
+        		"uid": {
+          		".validate": "root.child('users').child(newData.val()).exists()"
+        		},
+            "datetime": {
+              ".validate": true
+            },
+
+            "$other": { ".validate": false }
+          }
+        },
+
+        "$other": { ".validate": false }
+      }
+    },
+
+    "users": {
+      "$uid": {
+        ".write": "$uid === auth.uid",
+        ".validate": "newData.hasChildren(['username'])",
+
+        "username": {
+          ".validate": "newData.val().length > 0"
+        },
+
+        "$other": { ".validate": false }
+      }
+    }
+  }
+}
