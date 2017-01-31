@@ -3,7 +3,11 @@ import { PostComment, PostCommentForm } from 'components';
 
 const PostComments = ({ postId, comments }) => (
 	<div>
-		{Object.keys(comments).map(id => <PostComment key={id} comment={comments[id]} />)}
+		{Object.keys(comments).map(id => [
+			<hr key={`${id}-hr`} />,
+			<PostComment key={`${id}-comment`} comment={comments[id]} />
+		])}
+		<hr />
 		<PostCommentForm postId={postId} />
 	</div>
 );

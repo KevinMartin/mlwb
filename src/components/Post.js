@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { PostLink } from 'components';
 
 const Post = ({ id, post, summary }) => (
-	<article className="panel">
+	<article>
 		{ summary
 			? <PostLink id={id}>View Full Post</PostLink>
 			: <div>{post.content}</div> }

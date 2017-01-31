@@ -2,9 +2,9 @@ import React, { PropTypes } from 'react';
 import data from 'decorators/data';
 
 const PostComment = ({ comment, data: author }) => (
-	<div className="panel">
+	<div>
 		<header>
-			Created By: {author.username}
+			Comment by: {author.username}
 		</header>
 
 		{comment.content}
