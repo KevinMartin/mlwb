@@ -8,4 +8,3 @@ export PostCommentForm from './PostCommentForm';
 export PostComments from './PostComments';
 export PostForm from './PostForm';
 export PostLink from './PostLink';
-export Sidebar from './Sidebar';

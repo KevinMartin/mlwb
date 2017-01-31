@@ -1,17 +1,10 @@
 import React, { PropTypes } from 'react';
-import { Header, Sidebar } from 'components';
-import styles from './styles.scss';
+import { Header } from 'components';
 
 const App = ({ children }) => (
-	<div className={styles.container}>
-		<div className="container">
-			<Header />
-
-			<div className={`row ${styles.content}`}>
-				<div className="col-xs-12 col-md-9">{children}</div>
-				<Sidebar className="col-xs-12 col-md-3" />
-			</div>
-		</div>
+	<div>
+		<Header />
+		{children}
 	</div>
 );
 

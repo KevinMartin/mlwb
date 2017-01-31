@@ -1,0 +1,14 @@
+@import "../../theme/variables.scss";
+
+.navbar {
+	background-color: transparent;
+	border: 0;
+}
+
+@media only screen and (min-width: 768px) {
+	.navbar {
+		position: absolute;
+		top: 0;
+		width: 100%;
+	}
+}
