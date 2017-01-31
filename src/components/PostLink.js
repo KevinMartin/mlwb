@@ -1,13 +1,22 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
-const PostLink = ({ id, children }) => (
-	<Link to={`/post/${id}`} className="btn btn-link">{children}</Link>
+function getPath(id, action) {
+	return `/posts/${id}/${action}`.replace(/\/$/, '');
+}
+
+const PostLink = ({ id, action, children }) => (
+	<Link to={getPath(id, action)} className="btn btn-link">{children}</Link>
 );
 
 PostLink.propTypes = {
+	action: PropTypes.string,
 	id: PropTypes.string.isRequired,
 	children: PropTypes.node.isRequired
+};
+
+PostLink.defaultProps = {
+	action: ''
 };
 
 export default PostLink;
