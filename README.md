@@ -46,6 +46,7 @@ etc..)
 * SEO using Helmet package. Every page has it's own page title, description, and more.
 * Blog Posts can be written in Markdown (CommonMark)
 * Application is a Universal/Isomorphic React app, meaning that it renders on the server.
+* All commits a signed/verified
 
 ## Installation
 
