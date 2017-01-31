@@ -1,6 +1,6 @@
 import React, { PropTypes, PureComponent } from 'react';
 import { Modal } from 'react-bootstrap';
-import data, { pathToJS } from 'decorators/data';
+import data from 'decorators/data';
 import { AuthForm } from 'components';
 
 export default (WrappedComponent) => {
@@ -8,7 +8,7 @@ export default (WrappedComponent) => {
 		static displayName = `EnsureAccount(${WrappedComponent.displayName || WrappedComponent.name})`
 
 		static propTypes = {
-			auth: PropTypes.object,
+			data: PropTypes.object,
 			children: PropTypes.oneOfType([
 				PropTypes.arrayOf(PropTypes.node),
 				PropTypes.node
@@ -16,7 +16,7 @@ export default (WrappedComponent) => {
 		}
 
 		static defaultProps = {
-			auth: null,
+			data: null,
 			children: null
 		}
 
@@ -29,19 +29,19 @@ export default (WrappedComponent) => {
 		}
 
 		componentWillReceiveProps(nextProps) {
-			if (this.callback && nextProps.auth) {
+			if (this.callback && nextProps.data) {
 				this.setState({
 					isOpen: false
 				});
 
-				this.callback(nextProps.auth);
+				this.callback(nextProps.data);
 				this.callback = null;
 			}
 		}
 
 		ensureAccount(callback) {
-			if (this.props.auth) {
-				callback(this.props.auth);
+			if (this.props.data) {
+				callback(this.props.data);
 				return;
 			}
 
@@ -82,7 +82,8 @@ export default (WrappedComponent) => {
 		}
 	}
 
-	return data(({ firebase }) => ({
-		auth: pathToJS(firebase, 'auth')
-	}))(EnsureAccount);
+	return data('/auth', {
+		Loading: false,
+		Empty: false
+	})(EnsureAccount);
 };

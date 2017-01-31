@@ -1,16 +1,16 @@
 import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import data, { pathToJS } from 'decorators/data';
+import data from 'decorators/data';
 
-const signupHandler = ({ handleSubmit, firebase }) => handleSubmit(
+const signupHandler = (handleSubmit, firebase) => handleSubmit(
 	values => firebase.createUser(values, {
 		username: values.email.split('@')[0]
 	})
 );
 
-const AuthForm = props => (
-	<form onSubmit={props.handleSubmit(props.firebase.login)}>
-		{ props.authError ? <p>{props.authError.toString()}</p> : null }
+const AuthForm = ({ handleSubmit, firebase, data: authError }) => (
+	<form onSubmit={handleSubmit(firebase.login)}>
+		{ authError ? <p>{authError.toString()}</p> : null }
 
 		<div className="form-group">
 			<label htmlFor="email">Email Address</label>
@@ -28,7 +28,7 @@ const AuthForm = props => (
 			</div>
 
 			<div className="col-xs-6">
-				<button type="submit" className="btn btn-default btn-block btn-lg" onClick={signupHandler(props)}>Sign Up</button>
+				<button type="submit" className="btn btn-default btn-block btn-lg" onClick={signupHandler(handleSubmit, firebase)}>Sign Up</button>
 			</div>
 		</div>
 	</form>
@@ -36,18 +36,19 @@ const AuthForm = props => (
 
 AuthForm.propTypes = {
 	firebase: PropTypes.object.isRequired,
-	authError: PropTypes.any,
+	data: PropTypes.any,
 	handleSubmit: PropTypes.func.isRequired
 };
 
 AuthForm.defaultProps = {
-	authError: null
+	data: null
 };
 
 export default reduxForm({
 	form: 'signup'
 })(
-	data(({ firebase }) => ({
-		authError: pathToJS(firebase, 'authError')
-	}))(AuthForm)
+	data('/authError', {
+		Loading: false,
+		Empty: false
+	})(AuthForm)
 );

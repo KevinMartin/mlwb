@@ -12,19 +12,19 @@ const DefaultEmpty = () => (
 
 export const { isLoaded, isEmpty, dataToJS, pathToJS } = helpers;
 
-export default (path, {
+export default (pathOrFn, {
 	Loading = DefaultLoading,
 	Empty = DefaultEmpty
 } = {}) => (WrappedComponent) => {
-	if (typeof path === 'function') {
-		return firebase()(connect(path)(WrappedComponent));
+	if (!pathOrFn) {
+		return firebase()(WrappedComponent);
 	}
 
 	const DataContainer = (props) => {
-		if (!isLoaded(props.data)) {
-			return <Loading />;
-		} else if (isEmpty(props.data)) {
-			return <Empty />;
+		if (Loading && !isLoaded(props.data)) {
+			return <Loading {...props} />;
+		} else if (Empty && isEmpty(props.data)) {
+			return <Empty {...props} />;
 		}
 
 		return (
@@ -36,9 +36,14 @@ export default (path, {
 		data: PropTypes.any
 	};
 
-	return firebase([path])(
-		connect(({ firebase: fb }) => ({
-			data: dataToJS(fb, path)
+	const path = Array.isArray(pathOrFn) ? pathOrFn[0] : pathOrFn;
+	const getPath = typeof path === 'function' ? path : () => path.replace(/^\//, '');
+	const query = typeof path === 'function' ? (...args) => [path(...args)] : [pathOrFn];
+	const toJS = path[0] === '/' ? pathToJS : dataToJS;
+
+	return firebase(query)(
+		connect(({ firebase: fb }, props) => ({
+			data: toJS(fb, getPath(props, fb))
 		}))(DataContainer)
 	);
 };
