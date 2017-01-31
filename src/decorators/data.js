@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { firebase, helpers } from 'redux-react-firebase';
 
@@ -14,26 +14,23 @@ export const { isLoaded, isEmpty, dataToJS, pathToJS } = helpers;
 
 export default (pathOrFn, {
 	Loading = DefaultLoading,
-	Empty = DefaultEmpty
+	Empty = DefaultEmpty,
+	propKey = 'data'
 } = {}) => (WrappedComponent) => {
 	if (!pathOrFn) {
 		return firebase()(WrappedComponent);
 	}
 
 	const DataContainer = (props) => {
-		if (Loading && !isLoaded(props.data)) {
+		if (Loading && !isLoaded(props[propKey])) {
 			return <Loading {...props} />;
-		} else if (Empty && isEmpty(props.data)) {
+		} else if (Empty && isEmpty(props[propKey])) {
 			return <Empty {...props} />;
 		}
 
 		return (
 			<WrappedComponent {...props} />
 		);
-	};
-
-	DataContainer.propTypes = {
-		data: PropTypes.any
 	};
 
 	const path = Array.isArray(pathOrFn) ? pathOrFn[0] : pathOrFn;
@@ -43,7 +40,7 @@ export default (pathOrFn, {
 
 	return firebase(query)(
 		connect(({ firebase: fb }, props) => ({
-			data: toJS(fb, getPath(props, fb))
+			[propKey]: toJS(fb, getPath(props, fb))
 		}))(DataContainer)
 	);
 };
